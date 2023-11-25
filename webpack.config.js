@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
@@ -12,7 +13,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(tsx?|ts)$/,
         use: 'babel-loader',
         exclude: /node_modules/,
       },
@@ -23,7 +24,9 @@ module.exports = {
     ],
   },
   devServer: {
-    contentBase: './dist',
+    static: {
+      directory: path.join(__dirname, 'public'), // указываем папку public как корень сервера
+    },
     port: 3000,
     hot: true,
   },
